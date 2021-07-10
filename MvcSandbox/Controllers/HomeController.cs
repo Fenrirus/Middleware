@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Microsoft.AspNetCore.Mvc;
+using MvcSandbox.Models;
 
 namespace MvcSandbox.Controllers
 {
@@ -11,8 +12,16 @@ namespace MvcSandbox.Controllers
         [ModelBinder]
         public string Id { get; set; }
 
+        [HttpGet]
         [Route("/contact-us", Name = "Contact")]
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("/contact-us", Name = "Contact")]
+        public IActionResult Contact([FromForm] Contact info)
         {
             return View();
         }

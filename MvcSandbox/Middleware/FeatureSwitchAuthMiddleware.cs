@@ -21,7 +21,7 @@ namespace MvcSandbox.Middleware
 
             if (endpoint != null)
             {
-                var FeatureSwitch = configuration.GetSection("FeaturesWitches").GetChildren().FirstOrDefault(x => x.Key == endpoint.Name); ;
+                var FeatureSwitch = configuration.GetSection("FeaturesWitches").GetChildren().FirstOrDefault(x => x.Key == endpoint.Name);
 
                 if (FeatureSwitch != null && !bool.Parse(FeatureSwitch.Value))
                 {
@@ -33,10 +33,7 @@ namespace MvcSandbox.Middleware
                         EndpointMetadataCollection.Empty, "Featured Not Found"));
                 }
             }
-            else
-            {
-                await _next(httpContext);
-            }
+            await _next(httpContext);
         }
     }
 }

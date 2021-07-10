@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvcSandbox.Middleware;
+using MvcSandbox.ModelBind;
 using System;
 using System.IO;
 using System.Linq;
@@ -109,7 +110,10 @@ namespace MvcSandbox
                 options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
             });
             services.AddServerSideBlazor();
-            services.AddMvc();
+            services.AddMvc(opt =>
+                {
+                    opt.ModelBinderProviders.Insert(0, new CSVModelBinderProvider());
+                });
         }
 
         private static Task WriteEndpoints(HttpContext httpContext)
